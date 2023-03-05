@@ -1,5 +1,3 @@
-from app import app
-
 import gevent.monkey
 gevent.monkey.patch_all()
 
@@ -10,12 +8,13 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_socketio import SocketIO, join_room, leave_room
 from pymongo.errors import DuplicateKeyError
-from app.db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, get_neventsid
-from app.db import get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages, get_events_for_user_date
-from app.db import add_event, get_events_for_user, get_gevents, add_gevent, update_user, get_video, delete_event, delete_gevent
-from app.db import add_nevent, get_nevents_for_user, get_nevents_by_id, delete_nevents_by_id, add_napproval_for_user, get_napproval_for_user
+from db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, get_neventsid
+from db import get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages, get_events_for_user_date
+from db import add_event, get_events_for_user, get_gevents, add_gevent, update_user, get_video, delete_event, delete_gevent
+from db import add_nevent, get_nevents_for_user, get_nevents_by_id, delete_nevents_by_id, add_napproval_for_user, get_napproval_for_user
 import random
 
+app = Flask(__name__)
 app.secret_key = "granthbagadiagranthbagadia"
 socketio = SocketIO(app)
 login_manager = LoginManager()
@@ -464,3 +463,6 @@ def page_not_found(e):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('500.html'), 404
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True, host='0.0.0.0')
