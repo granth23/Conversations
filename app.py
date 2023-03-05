@@ -465,4 +465,4 @@ def page_not_found(e):
     return render_template('500.html'), 404
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, host='0.0.0.0')
+    socketio.run(app, debug=False, host='0.0.0.0')
