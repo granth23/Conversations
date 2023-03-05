@@ -3,7 +3,7 @@ from bson import ObjectId
 from pymongo import MongoClient, DESCENDING
 from werkzeug.security import generate_password_hash
 
-from user import User
+from app.user import User
 
 client = MongoClient("mongodb+srv://test:test@chatapp.yv6vv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
